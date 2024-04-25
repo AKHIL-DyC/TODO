@@ -48,6 +48,14 @@ app.put("/completed",async(req,res)=>{
     msg:"marked as completed"
    })
 })
+
+app.get('/quotes',async(req,res)=>{
+    const response= await fetch('https://zenquotes.io/api/quotes/')
+    const finalresponse=await response.json()
+    res.json(finalresponse)
+})
+
+
 app.listen(3000,(req,res)=>{
     console.log("listening on port 3000.....")
 })

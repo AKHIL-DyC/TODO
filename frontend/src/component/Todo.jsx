@@ -1,7 +1,7 @@
 import { Hidden } from "@mui/material"
 
 export function Todo({todos}){
-    return <div style={{display:'flex',gap:'2vh',width:'88vw',flexWrap:"wrap",marginTop:"3vh",gap:'3vw'}}>
+    return <div style={{display:'flex',width:'88vw',flexWrap:"wrap",marginTop:"3vh",gap:'3vw'}}>
         {todos.map(function(todo){
             return<div style={{
                 width:'20vw',
@@ -9,7 +9,7 @@ export function Todo({todos}){
                 display:'flex',
                 borderRadius:'9px',
                 alignItems:"center",
-                backgroundColor:'#EBECED',
+                backgroundColor:'#dda15e',
                 justifyContent:'space-between',boxShadow:'0px 0px 5px 0px rgba(0,0,0,0.4)',
                 color:"black",
                 overflow:'hidden'
