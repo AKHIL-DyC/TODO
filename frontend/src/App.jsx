@@ -15,16 +15,20 @@ function App() {
     .then(async function(res){
     const json = await res.json();
     setTodos(json.todo);
+   // setTodos((prev) => [prev, ...json.todo]) 
+   // const addtodo=setTodos((prev) => [prev, ...json.todo]) 
     })
     },[])
     const addtodo=(newtodo)=>{setTodos([...todos,newtodo])}
+    const addcomplete=(newcomplete)=>{setTodos([...todos,newcomplete])}
+    //const addtodo=(newtodo)=>{setTodos((prev) => [prev, newtodo]) }
   return (
     <>
     <Navbar/>
     <div style={{display:'flex',width:'100%',gap:'1vw'}}>
     <div style={{display:'flex',justifyContent:'space-between',width:'70vw',flexDirection:'column'}}>
       <CreateTodo addtodo={addtodo}/> 
-     <Todo todos={todos}></Todo>
+     <Todo addcomplete={addcomplete}todos={todos}></Todo>
     </div>
     <div>
       <Clock/>

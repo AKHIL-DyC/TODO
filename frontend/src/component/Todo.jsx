@@ -1,6 +1,8 @@
 import { Hidden } from "@mui/material"
+import { useState } from "react"
 
-export function Todo({todos}){
+export function Todo({todos,addcomplete}){
+    const[todo,setodo]=useState("");
     return <div style={{display:'flex',width:'88vw',flexWrap:"wrap",marginTop:"3vh",gap:'3vw'}}>
         {todos.map(function(todo){
             return<div style={{
@@ -17,7 +19,25 @@ export function Todo({todos}){
                 <h2>{todo.title}</h2>
                 <div>{todo.description}</div>
                 </div>
-                <button>{todo.completed?"Done" :"completed?"}</button>
+                <button  onClick={(id)=>{
+                    fetch("http://localhost:3000/completed",{
+                        method:"PUT",
+                        headers: {
+                            "Content-Type": "application/json" // Specify JSON content type
+                        },
+                        body:JSON.stringify({
+                            _id:todo._id
+                        })
+                    })
+                    const newtodo={
+                        title:todo.title,
+                        description:todo.description,
+                        completed:true,
+                    }
+                   addcomplete(newtodo) 
+                   window.location.reload()//need optimisation
+                   
+                }}>{todo.completed?"Done" :"completed?"}</button>
 
             </div>
         })}
