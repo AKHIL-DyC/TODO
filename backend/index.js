@@ -72,6 +72,6 @@ app.get('/quotes',async(req,res)=>{
 })
 
 
-app.listen(3000,(req,res)=>{
+app.listen('44.233.151.27',(req,res)=>{
     console.log("listening on port 3000.....")
 })
