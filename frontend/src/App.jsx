@@ -19,6 +19,20 @@ function App() {
    // const addtodo=setTodos((prev) => [prev, ...json.todo]) 
     })
     },[])
+
+    const handleubdate=(id)=>{
+
+        fetch("http://localhost:3000/completed",{
+          method:"PUT",
+          headers: {
+              "Content-Type": "application/json" ,
+          },
+          body:JSON.stringify({
+              _id:id
+          })
+      })
+     }    
+
     const addtodo=(newtodo)=>{setTodos([...todos,newtodo])}
     const addcomplete=(newcomplete)=>{setTodos([...todos,newcomplete])}
     //const addtodo=(newtodo)=>{setTodos((prev) => [prev, newtodo]) }
@@ -28,7 +42,7 @@ function App() {
     <div style={{display:'flex',width:'100%',gap:'1vw'}}>
     <div style={{display:'flex',justifyContent:'space-between',width:'70vw',flexDirection:'column'}}>
       <CreateTodo addtodo={addtodo}/> 
-     <Todo addcomplete={addcomplete}todos={todos}></Todo>
+     <Todo handleubdate={handleubdate}todos={todos}></Todo>
     </div>
     <div>
       <Clock/>

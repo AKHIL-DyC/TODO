@@ -48,7 +48,23 @@ app.put("/completed",async(req,res)=>{
     msg:"marked as completed"
    })
 })
-
+app.delete("/delete",async(req,res)=>{
+    const payload=req.body
+    const verifiedpayload=ubdateTodo.safeParse(payload);
+    if(!verifiedpayload.success){
+        res.status(411).json({
+            msg:"invalid id",
+        })
+        return
+    }
+    const todelete=await todo.findByIdAndDelete(payload._id);
+    if (!todelete) {
+        return res.status(404).json({ message: "Data not found" });
+    }
+    res.json({
+        msg:"deleted successfully"
+    })
+})
 app.get('/quotes',async(req,res)=>{
     const response= await fetch('https://zenquotes.io/api/quotes/')
     const finalresponse=await response.json()
