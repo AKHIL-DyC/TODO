@@ -18,7 +18,7 @@ function App() {
    // setTodos((prev) => [prev, ...json.todo]) 
    // const addtodo=setTodos((prev) => [prev, ...json.todo]) 
     })
-    },[])
+    },[todos])
 
     const handleubdate=(id)=>{
 
