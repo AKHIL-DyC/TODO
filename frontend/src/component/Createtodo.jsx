@@ -8,15 +8,17 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
 import { useState } from 'react'
-export function CreateTodo({addtodo}){
+export function CreateTodo({addtodo,setfetchallowed}){
+  
+  const isMobile = window.innerWidth <= 768;
     const [title,setTitle]=useState("");
         const[description,setDescription]=useState("");
     return <div>
-      <div style={{display:'flex'}}>
+      <div style={{display:'flex',flexDirection:isMobile?"column":"row"}}>
          <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
+        '& > :not(style)': { m: 1, width:isMobile?'15ch':'25ch' },
       }}
       noValidate
       autoComplete="off"
@@ -34,18 +36,20 @@ export function CreateTodo({addtodo}){
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
      
       <Fab color='black' aria-label="add" onClick={function(){
-    fetch("http://localhost:3000/todo", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json" // Specify JSON content type
-        },
-        body: JSON.stringify({ // Convert body object to JSON string
-            title: title,
-            description: description,
-            completed: false
+        
+          fetch("https://todo-e6lc.onrender.com/todo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json" // Specify JSON content type
+            },
+            body: JSON.stringify({ // Convert body object to JSON string
+                title: title,
+                description: description,
+                completed: false
+            })
         })
-    })
-    .then(async function(res) {
+        
+    .then(async function(res) {  
         const json = await res.json(); // Call res.json() as a function
         alert("todo added");
         const newtodo={
@@ -53,13 +57,16 @@ export function CreateTodo({addtodo}){
             description:description,
             completed:false
            }
+          
         addtodo(newtodo)
+        
+       
     })
     .catch(function(error) {
         console.error('Error:', error);
     });
    
-  
+    
 }}>
         <AddIcon />
       </Fab>
